@@ -1,0 +1,41 @@
+[
+        {
+            "restName": "burger king",
+            "cuisine": "burger",
+            "long": -107.2295,
+	    "lat: 3.6224
+        },
+        {
+            "restName": "holmes",
+            "cuisine": "burger",
+            "long":  -107.23,
+            "lat": 3.62
+               
+        },
+        {
+            "restName": "pizza queen",
+            "cuisine": "pizza",
+            "long":  107.385,
+            "lat": 3.62
+        },
+        {
+
+            "restName": "pizza queen",
+            "cuisine": "pizza",
+            "long":  107.6368,
+            "lat": 4.6273
+        },
+        {
+            "restName": "pizza station",
+            "cuisine": "pizza",
+            "long":  107.525,
+            "lat": 4.6273
+        },
+        {
+            "restName": "ebn elbalad",
+            "cuisine": "grills",
+            "long":  107.525,
+            "lat": 4.6573
+	}
+    ]
+
