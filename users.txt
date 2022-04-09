@@ -1,0 +1,60 @@
+[        {
+            "fullName": {
+                "firstName": "ahmed",
+                "lastName": "hany"
+            },
+            "favCuisines": [
+                "burger",
+                "pizza"
+            ],
+            "managedRests": ["624fecd3e88b5fcf98429089", "62507853cdd7f93668f1a193"]
+            },               
+                
+        {
+            "fullName": {
+                "firstName": "mohab",
+                "lastName": "hany"
+            },
+            "favCuisines": [
+                "pizza",
+		"syrian dishes"
+            ],
+            "managedRests": []
+            },
+
+	{
+            "fullName": {
+                "firstName": "mohab",
+                "lastName": "hany"
+            },
+            "favCuisines": [
+                "pizza"
+            ],
+            "managedRests": []
+            },
+	
+	{
+	    "fullName": {
+                "firstName": "muhammed",
+                "lastName": "hany"
+            },
+            "favCuisines": [
+                "pizza"
+            ],
+            "managedRests": []
+	},
+
+	
+	{
+	    "fullName": {
+                "firstName": "muhammed",
+                "lastName": "khawaga"
+            },
+            "favCuisines": [
+                "pizza",
+		"fried chicken",
+		"grills"
+            ],
+            "managedRests": []
+	}
+]

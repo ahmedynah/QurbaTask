@@ -1,7 +1,13 @@
+/**
+ *  TODO: to set the time stamp for the logger in the console
+ * @returns string
+ */
 const getTimeStamp = (): string =>{
     return new Date().toISOString();
 }
-
+/**
+ *  TODO: to set the info about the request in console
+ */
 const info = (namespace : string, message: string, object?: any) =>{
     if(object){
         console.log(`[${getTimeStamp()}] [INFO] [${namespace}] ${message}`, object);
