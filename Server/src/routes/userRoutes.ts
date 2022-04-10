@@ -26,7 +26,7 @@ router.get('/get/all', controller.GetAllUsers);
 */
 router.get('/get/search/:cuisine', controller.GetAggregatedList);
 
-// search for a user according to a query input
+// search for a user according to the req body input
 router.get("/get/search", controller.SearchItems);
 
 // get user with the id 

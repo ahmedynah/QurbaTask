@@ -11,7 +11,7 @@ const UserSchema: Schema = new Schema({
                      validate:{
                          // to make sure that name has only letters
                          validator: function hasNumber(input: any) {
-                            return /\d/.test(input);
+                            return !(/\d/.test(input));
                           },
                           message: (props: any) => `${props.value} contains a number`
                           
@@ -23,7 +23,7 @@ const UserSchema: Schema = new Schema({
                     validate:{
                         // to make sure that name has only letters
                         validator: function hasNumber(input: any) {
-                           return /\d/.test(input);
+                           return !(/\d/.test(input));
                          },
                          message: (props: any) => `${props.value} contains a number`
                          
