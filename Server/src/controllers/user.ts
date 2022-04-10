@@ -14,19 +14,19 @@ var User = mongoose.model("User", UserSchema);
  * --------
  * localhost:8080/api/user/create/user
  * req.body =
- * 
- *  {
- *       "fullName": {
- *                   "firstName": "mohab",
- *                   "lastName": "hany"
- *               },
- *       "favCuisines": [
- *                   "Pizza"
- *               ],
- *       "managedRests": [
- *           "624fecd3e88b5fcf98429089"
- *       ]
- *   } 
+
+             {
+                  "fullName": {
+                              "firstName": "mohab",
+                              "lastName": "hany"
+                          },
+                  "favCuisines": [
+                              "Pizza"
+                          ],
+                  "managedRests": [
+                      "624fecd3e88b5fcf98429089"
+                  ]
+              } 
  *  
  * @param req 
  * @param res 
@@ -92,12 +92,12 @@ const GetUserById = (req: Request, res: Response, next: NextFunction) => {
  * localhost:8080/api/user/get/search
  * 
  *  req.body = 
- * {
-*    "fullName": {
-*       "firstName": "ahmed",
-*       "lastName": "hany"
-*       }
-*   }
+             {
+                "fullName": {
+                   "firstName": "ahmed",
+                   "lastName": "hany"
+                   }
+               }
  * @param req 
  * @param res 
  * @param next 
@@ -159,10 +159,10 @@ const GetAllUsers = (req: Request, res: Response, next: NextFunction) => {
  * localhost:8080/api/user/insert/users
  * 
  * req.body =
- * {
- *      "data" = 
- *                   [        
- *          {
+ {
+      "data" : 
+                   [        
+          {
                     "fullName": {
                         "firstName": "ahmed",
                         "lastName": "hany"
@@ -185,7 +185,7 @@ const GetAllUsers = (req: Request, res: Response, next: NextFunction) => {
                     "managedRests": []
                 }
             ]
- * }
+  }
  * 
  * @param req 
  * @param res 
@@ -260,12 +260,12 @@ const GetAggregatedList = (req: Request, res: Response, next: NextFunction) => {
  * 
  *  req.params.id = 6250ee8e727fe7d0f853593b
  *  req.body = 
- * {
-*    "fullName": {
-*       "firstName": "ahmed",
-*       "lastName": "hany"
-*       }
-*   }
+                 {
+                   "fullName": {
+                      "firstName": "ahmed",
+                      "lastName": "hany"
+                      }
+                  }
  * @param req 
  * @param res 
  * @param next 
