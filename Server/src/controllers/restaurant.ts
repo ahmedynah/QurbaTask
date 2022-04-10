@@ -19,8 +19,8 @@ const SetSlug = (restName: string) => {
 
 /**
  * Description: this function prepare an object with the right data to be used
- * @param body 
- * @returns object
+ * @param body: any
+ * @returns rest: object
  */
 const PrepareDataForCreate = ( body:any ) => {
     let { restName, cuisine, long, lat } = body;
@@ -32,7 +32,22 @@ const PrepareDataForCreate = ( body:any ) => {
 }
 
 /**
- * Description: creates a restaurant
+ * Description: Creates one restaurant
+ * 
+ * example:
+ * --------
+ * localhost:8080/api/rest/create/rest
+ * req.body =
+ * 
+ *  {
+ *       
+ *           "restName": "pizza queen",
+ *           "cuisine": "pizza",
+ *           "long": -60.23689,
+ *           "lat": 20.62739
+ *       
+ *   } 
+ *  
  * @param req 
  * @param res 
  * @param next 
@@ -61,7 +76,33 @@ const CreateRestaurant = async (req: Request, res: Response, next: NextFunction)
 }
 
 /**
- * Description: Creates several Restaurants
+ * Description: Inserts Many restaurants into db
+ * example:
+ * --------
+ * localhost:8080/api/rest/insert/rests
+ * req.body =
+ * {
+ *      "data" = 
+ *                [        
+ *                      {
+                    
+                            "restName": "pizza queen",
+                            "cuisine": "pizza",
+                            "long": -60.23689,
+                            "lat": 20.62739
+                        
+                        },               
+                        
+                        
+                    {
+                        "restName": "pizza station",
+                        "cuisine": "pizza",
+                        "long": -60.23689,
+                        "lat": 20.62739
+                    }
+            ]
+ * }
+ * 
  * @param req 
  * @param res 
  * @param next 
@@ -89,7 +130,13 @@ const InsertMany = (req: Request, res: Response, next: NextFunction) => {
 }
 
 /**
- * Description: search for the restaurant with the id supplied in the params
+ * Description: gets specific restaurant by id
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/rest/get/62507873cdd7f93668f1a199
+ * req.params.id = 62507873cdd7f93668f1a199
+ * 
  * @param req 
  * @param res 
  * @param next 
@@ -114,6 +161,10 @@ const GetRestaurantById = (req: Request, res: Response, next: NextFunction) => {
 
 /**
  * Description: search for restaurant with the slug supplied in the params
+ * example:
+ * --------
+ * localhost:8080/api/rest/get/holmes-0
+ * req.params.slug = pizza-queen
  * @param req 
  * @param res 
  * @param next 
@@ -140,7 +191,15 @@ const GetRestaurantBySlug = (req: Request, res: Response, next: NextFunction) =>
 }
 
 /**
- * Description: search for restaurants with specific query
+ * Description: searches for a restaurant with tha specific body
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/rest/get/search
+ *  req.body = 
+ * {
+ *    "restName": "holmes"
+ *   }
  * @param req 
  * @param res 
  * @param next 
@@ -166,7 +225,11 @@ const SearchItems = (req: Request, res: Response, next: NextFunction) => {
 };
 
 /**
- * Description:  get all documents
+ * Description: gets all restaurant 
+ * example:
+ * ---------
+ * localhost:8080/api/rest/get/all
+ * 
  * @param req 
  * @param res 
  * @param next 
@@ -192,6 +255,9 @@ const GetAllRestaurants = (req: Request, res: Response, next: NextFunction) => {
 
 /**
  * Description: search for all restaurant in 1 km distance from the restaurant with the id supplied in params
+ * example:
+ * --------
+ * localhost:8080/api/rest/get/search1km/62507873cdd7f93668f1a199
  * @param req 
  * @param res 
  * @param next 
@@ -205,6 +271,7 @@ const GetRestsIn1Km = async (req: Request, res: Response, next: NextFunction) =>
 
     //using mongoose geoSpatial
     Restaurant.find().where('location').within(
+        // radius: gets data in radians so 1km = 0.1570 radians
         { center: cor, radius: 0.1570, unique: true, spherical: true }
     ).exec()
         .then((results: any) => {
@@ -225,6 +292,21 @@ const GetRestsIn1Km = async (req: Request, res: Response, next: NextFunction) =>
 
 }
 
+/**
+ * Description: updates one restaurant
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/rest/update/6250ee8e727fe7d0f853593b
+ *  req.params.id = 6250ee8e727fe7d0f853593b
+ *  req.body = 
+ * {
+*    "restName": "Hell's Kitchen"
+*   }
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 const UpdateOne = (req: Request, res: Response, next: NextFunction) => {
     const _id = req.params.id;
     let doc: any = {};
@@ -237,7 +319,7 @@ const UpdateOne = (req: Request, res: Response, next: NextFunction) => {
     Restaurant.findOneAndUpdate({ _id }, { ...doc }, { returnDocument: 'after', overwrite: false, runValidators: true, context: 'query' })
         .then((result: any) => {
             return res.status(201).json({
-                users: result
+                restaurants: result
             })
         })
         .catch((error: any) => {
@@ -250,7 +332,13 @@ const UpdateOne = (req: Request, res: Response, next: NextFunction) => {
 }
 
 /**
- * Description:  delete one restaurant with id supplied in params
+ * Description: deletes one restaurant
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/rest/del/6250ee1c727fe7d0f8535935
+ * req.params.id = 6250ee8e727fe7d0f853593b
+ *  
  * @param req 
  * @param res 
  * @param next 
@@ -273,7 +361,12 @@ const DeleteOne = (req: Request, res: Response, next: NextFunction) => {
 }
 
 /**
- * Description: delete all documents
+ * Description: deletes all restaurants
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/rest/del/all
+ * 
  * @param req 
  * @param res 
  * @param next 

@@ -10,8 +10,10 @@ var User = mongoose.model("User", UserSchema);
 /**
  * Description: Creates one user
  * 
- * req.body example
- * ----------------
+ * example:
+ * --------
+ * localhost:8080/api/user/create/user
+ * req.body =
  * 
  *  {
  *       "fullName": {
@@ -58,7 +60,7 @@ const CreateUser = (req: Request, res: Response, next: NextFunction) => {
  * ---------
  * localhost:8080/api/user/get/624fecd3e88b5fcf98429089
  * 
- * req.query = 624fecd3e88b5fcf98429089
+ * req.params.id = 624fecd3e88b5fcf98429089
  * 
  * @param req 
  * @param res 
@@ -156,7 +158,7 @@ const GetAllUsers = (req: Request, res: Response, next: NextFunction) => {
  * --------
  * localhost:8080/api/user/insert/users
  * 
- * req.body should be like =
+ * req.body =
  * {
  *      "data" = 
  *                   [        
@@ -212,7 +214,8 @@ const InsertMany = (req: Request, res: Response, next: NextFunction) => {
    example:
    --------
    localhost:8080/api/user/get/search/burger
-   
+   req.params.cuisine = burger
+
  * @param req 
  * @param res 
  * @param next 
@@ -248,6 +251,27 @@ const GetAggregatedList = (req: Request, res: Response, next: NextFunction) => {
     })
 }
 
+/**
+ * Description: updates one user
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/user/update/6250ee8e727fe7d0f853593b
+ * 
+ *  req.params.id = 6250ee8e727fe7d0f853593b
+ *  req.body = 
+ * {
+*    "fullName": {
+*       "firstName": "ahmed",
+*       "lastName": "hany"
+*       }
+*   }
+ * @param req 
+ * @param res 
+ * @param next 
+ */
+
+
 const UpdateOne = (req: Request, res: Response, next: NextFunction) => {
     const _id = req.params.id;
     let doc: any = {};
@@ -270,6 +294,20 @@ const UpdateOne = (req: Request, res: Response, next: NextFunction) => {
         })
 }
 
+/**
+ * Description: deletes one user
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/user/del/6250ee1c727fe7d0f8535935
+ * 
+ * req.params.id = 6250ee8e727fe7d0f853593b
+ *  
+ * @param req 
+ * @param res 
+ * @param next 
+ */
+
 const DeleteOne = (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
     User.findByIdAndDelete(id)
@@ -287,6 +325,17 @@ const DeleteOne = (req: Request, res: Response, next: NextFunction) => {
         })
 }
 
+/**
+ * Description: deletes all users
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/user/del/all
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 const DeleteAll = (req: Request, res: Response, next: NextFunction) => {
     User.deleteMany()
         .exec()
