@@ -6,6 +6,31 @@ import UserSchema from "../models/userSchema";
 const NAMESPACE = "User Controller"
 var User = mongoose.model("User", UserSchema);
 
+
+/**
+ * Description: Creates one user
+ * 
+ * req.body example
+ * ----------------
+ * 
+ *  {
+ *       "fullName": {
+ *                   "firstName": "mohab",
+ *                   "lastName": "hany"
+ *               },
+ *       "favCuisines": [
+ *                   "Pizza"
+ *               ],
+ *       "managedRests": [
+ *           "624fecd3e88b5fcf98429089"
+ *       ]
+ *   } 
+ *  
+ * @param req 
+ * @param res 
+ * @param next 
+ * @returns 
+ */
 const CreateUser = (req: Request, res: Response, next: NextFunction) => {
     const user: any = new User({
         ...req.body
@@ -26,6 +51,20 @@ const CreateUser = (req: Request, res: Response, next: NextFunction) => {
         });
 }
 
+/**
+ * Description: gets specific user by id
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/user/get/624fecd3e88b5fcf98429089
+ * 
+ * req.query = 624fecd3e88b5fcf98429089
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
+
 const GetUserById = (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
     User.findById(id)
@@ -43,11 +82,29 @@ const GetUserById = (req: Request, res: Response, next: NextFunction) => {
         })
 }
 
+/**
+ * Description: searches for a user with tha specific body
+ * 
+ * example:
+ * ---------
+ * localhost:8080/api/user/get/search
+ * 
+ *  req.body = 
+ * {
+*    "fullName": {
+*       "firstName": "ahmed",
+*       "lastName": "hany"
+*       }
+*   }
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 
 const SearchItems = (req: Request, res: Response, next: NextFunction) => {
 
-    const query = req.query
-    User.find(query)
+    const body = req.body
+    User.find(body)
         .exec()
         .then(results => {
             return res.status(200).json({
@@ -63,6 +120,17 @@ const SearchItems = (req: Request, res: Response, next: NextFunction) => {
             });
         })
 };
+
+/**
+ * Description: gets all user 
+ * example:
+ * ---------
+ * localhost:8080/api/user/get/all
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 
 const GetAllUsers = (req: Request, res: Response, next: NextFunction) => {
 
@@ -82,8 +150,47 @@ const GetAllUsers = (req: Request, res: Response, next: NextFunction) => {
         })
 }
 
+/**
+ * Description: Inserts Many users into db
+ * example:
+ * --------
+ * localhost:8080/api/user/insert/users
+ * 
+ * req.body should be like =
+ * {
+ *      "data" = 
+ *                   [        
+ *          {
+                    "fullName": {
+                        "firstName": "ahmed",
+                        "lastName": "hany"
+                    },
+                    "favCuisines": [
+                        "Burger",
+                        "Pizza"
+                    ],
+                    "managedRests": ["624fecd3e88b5fcf98429089", "62507853cdd7f93668f1a193"]
+                    },               
+                        
+                {
+                    "fullName": {
+                        "firstName": "mohab",
+                        "lastName": "hany"
+                    },
+                    "favCuisines": [
+                        "Pizza"
+                    ],
+                    "managedRests": []
+                }
+            ]
+ * }
+ * 
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 const InsertMany = (req: Request, res: Response, next: NextFunction) => {
-    User.insertMany([...req.body])
+    User.insertMany([...req.body.data])
     .then(results => {
         return res.status(200).json({
             users: results,
@@ -97,6 +204,19 @@ const InsertMany = (req: Request, res: Response, next: NextFunction) => {
         })
     })
 }
+
+/**
+ * Description: search for all users for a specific Cuisine (e.g. Burgers) that have the following criteria:
+                    - User has Burgers as part of their Favorite Cuisines
+                    - User has a restaurant where the Cuisine is Burger
+   example:
+   --------
+   localhost:8080/api/user/get/search/burger
+   
+ * @param req 
+ * @param res 
+ * @param next 
+ */
 
 const GetAggregatedList = (req: Request, res: Response, next: NextFunction) => {
   const data = User.aggregate([

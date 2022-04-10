@@ -22,7 +22,7 @@ router.delete("/del/all", controller.DeleteAll);
 // delete one restaurant with id supplied in params
 router.delete("/del/:id", controller.DeleteOne);
 
-// search for restaurants with specific query
+// search for restaurants with specific parameters in req.body body
 router.get("/get/search", controller.SearchItems);
 
 // search for all restaurant in 1 km distance from

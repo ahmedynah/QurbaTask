@@ -147,8 +147,8 @@ const GetRestaurantBySlug = (req: Request, res: Response, next: NextFunction) =>
  */
 const SearchItems = (req: Request, res: Response, next: NextFunction) => {
 
-    const query = req.query
-    Restaurant.find(query)
+    const body = req.body
+    Restaurant.find(body)
         .exec()
         .then(results => {
             return res.status(200).json({
