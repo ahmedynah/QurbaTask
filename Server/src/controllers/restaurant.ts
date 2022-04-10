@@ -38,16 +38,16 @@ const PrepareDataForCreate = ( body:any ) => {
  * --------
  * localhost:8080/api/rest/create/rest
  * req.body =
- * 
- *  {
- *       
- *           "restName": "pizza queen",
- *           "cuisine": "pizza",
- *           "long": -60.23689,
- *           "lat": 20.62739
- *       
- *   } 
- *  
+
+             {
+
+                      "restName": "pizza queen",
+                      "cuisine": "pizza",
+                      "long": -60.23689,
+                      "lat": 20.62739
+
+              } 
+          
  * @param req 
  * @param res 
  * @param next 
@@ -81,27 +81,27 @@ const CreateRestaurant = async (req: Request, res: Response, next: NextFunction)
  * --------
  * localhost:8080/api/rest/insert/rests
  * req.body =
- * {
- *      "data" = 
- *                [        
- *                      {
-                    
-                            "restName": "pizza queen",
-                            "cuisine": "pizza",
-                            "long": -60.23689,
-                            "lat": 20.62739
-                        
-                        },               
-                        
-                        
-                    {
-                        "restName": "pizza station",
-                        "cuisine": "pizza",
-                        "long": -60.23689,
-                        "lat": 20.62739
-                    }
-            ]
- * }
+                {
+                     "data" :
+                               [        
+                                     {
+                                    
+                                         "restName": "pizza queen",
+                                         "cuisine": "pizza",
+                                         "long": -60.23689,
+                                         "lat": 20.62739
+                                    
+                                     },               
+
+
+                                 {
+                                     "restName": "pizza station",
+                                     "cuisine": "pizza",
+                                     "long": -60.23689,
+                                     "lat": 20.62739
+                                 }
+                         ]
+                }
  * 
  * @param req 
  * @param res 
@@ -196,10 +196,10 @@ const GetRestaurantBySlug = (req: Request, res: Response, next: NextFunction) =>
  * example:
  * ---------
  * localhost:8080/api/rest/get/search
- *  req.body = 
- * {
- *    "restName": "holmes"
- *   }
+   req.body = 
+            {
+               "restName": "holmes"
+              }
  * @param req 
  * @param res 
  * @param next 
@@ -300,9 +300,9 @@ const GetRestsIn1Km = async (req: Request, res: Response, next: NextFunction) =>
  * localhost:8080/api/rest/update/6250ee8e727fe7d0f853593b
  *  req.params.id = 6250ee8e727fe7d0f853593b
  *  req.body = 
- * {
-*    "restName": "Hell's Kitchen"
-*   }
+             {
+               "restName": "Hell's Kitchen"
+              }
  * @param req 
  * @param res 
  * @param next 
