@@ -15,7 +15,7 @@ const NAMESPACE = 'Server';
 const router = express();
 
 // setting up Swagger
-const swaggerFile: any = (process.cwd()+"/src/swagger/swagger.json");
+const swaggerFile: any = (process.cwd()+"/src/swagger/openapi.json");
 const swaggerData: any = fs.readFileSync(swaggerFile, 'utf8');
 const swaggerDocument = JSON.parse(swaggerData);
 

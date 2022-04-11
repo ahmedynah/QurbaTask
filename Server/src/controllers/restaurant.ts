@@ -63,7 +63,7 @@ const CreateRestaurant = async (req: Request, res: Response, next: NextFunction)
     return rest.save()
         .then((result: any) => {
             return res.status(201).json({
-                data: result
+                restaurant: result
             });
         })
         .catch((error: any) => {
