@@ -1,0 +1,372 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "description": "This is a documentation for the Qurba backend API, please, note that not all apis are implemented and tested, however there is some trouble sending data in body or queries",
+    "version": "1.0.0",
+    "title": "Qurba API",
+    "contact": {
+      "email": "ahmedhanyhasn@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "/api/{direction}",
+      "description": "Development server",
+      "variables": {
+        "port": {
+          "default": "8080"
+        },
+        "direction": {
+          "enum": ["rest", "user"],
+          "default": "rest"
+        }
+      }
+    }
+  ],
+  "tags": [
+    {
+      "name": "Restaurants",
+      "description": "Restaurants endpoint"
+    },
+    {
+      "name": "Users",
+      "description": "Users endpoint"
+    }
+  ],
+  "paths": {
+    "/create/rest": {
+      "post": {
+        "tags": ["Restaurants"],
+        "summary": "Creates new restaurant",
+        "requestBody": {
+          "description": "Restaurant Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Restaurant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/insert/rests": {
+      "post": {
+        "tags": ["Restaurants"],
+        "summary": "Creates many users at once",
+        "requestBody": {
+          "description": "Restaurants Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "object",
+                      "$ref": "#/definitions/Restaurant"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/update/{id}": {
+      "put": {
+        "tags": ["Restaurants"],
+        "summary": "Updates a restaurant using id",
+        "requestBody": {
+          "description": "Restaurant Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Restaurant"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Takes id of the restaurant that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "624fecd3e88b5fcf98429089"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/get/all": {
+      "get": {
+        "tags": ["Restaurants"],
+        "summary": "Reads all restaurantsUpdate a restaurant",
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/get/{id}": {
+      "get": {
+        "tags": ["Restaurants"],
+        "summary": "Reads restaurant with specific id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "takes id of the restaurant that needs to be read",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "624fecd3e88b5fcf98429089"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/get/{slug}": {
+      "get": {
+        "tags": ["Restaurants"],
+        "summary": "Reads restaurant with specific slug",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "takes slug for the restaurant that needs to be read",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "pizza-queen"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/get/search": {
+      "get": {
+        "tags": ["Restaurants"],
+        "summary": "Searches for a restaurant with specific data supplied in body",
+        "requestBody": {
+          "description": "Restaurant Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Restaurant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/get/search1km/{id}": {
+      "get": {
+        "tags": ["Restaurants"],
+        "summary": "Searches for a restaurants around the restaurant with the supplied id in a radius of 1km",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the restaurant at the center",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "624fecd3e88b5fcf98429089"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/del/all":{
+      "delete":{
+        "tags": ["Restaurants"],
+        "summary": "Deletes all restaurants",
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/del/{id}":{
+      "delete":{
+        "tags": ["Restaurants"],
+        "summary": "Deletes restaurant with specific id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of specific restaurant",
+            "example": "624fecd3e88b5fcf98429089",
+            "schema":{"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "fullName": {
+          "type": "object",
+
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "nullable": false,
+              "description": "user's first name"
+            },
+            "lastName": {
+              "type": "string",
+              "nullable": false,
+              "description": "user's last name"
+            }
+          },
+          "description": "user's full name"
+        },
+        "favCuisines": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "user's favorite cuisines"
+        },
+        "managedRests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "id strings of the restaurants the user manage"
+        }
+      },
+      "example": {
+        "fullName": {
+          "firstName": "ahmed",
+          "lastName": "hany"
+        },
+        "favCuisines": ["burger", "pizza"],
+        "managedRests": ["624fecd3e88b5fcf98429089", "62507853cdd7f93668f1a193"]
+      }
+    },
+    "Restaurant": {
+      "type": "object",
+      "properties": {
+        "restName": {
+          "type": "string",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "cuisine": {
+          "type": "string"
+        },
+        "long": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        }
+      },
+      "example": {
+        "restName": "pizza queen",
+        "cuisine": "pizza",
+        "long": 107.385,
+        "lat": 3.62
+      }
+    }
+  }
+}
