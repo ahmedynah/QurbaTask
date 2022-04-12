@@ -7,7 +7,7 @@ Restaurant API
       1. *Please, create a .env file and create the following example:*
              1. #### SERVER_HOSTNAME = "localhost" ####
              2. #### SERVER_PORT=8080 #### 
-           *online mongodb credentials:*
+     - *online mongodb credentials:*
              1. #### DB_CONN_STRING= ####
              2. #### DB_NAME= ####
              3. #### MONGO_USERNAME = ####
@@ -22,7 +22,9 @@ Restaurant API
 # Images #
 - - - - -
 
-![alt text](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(249).png)
+![figure 1](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(249).png)
+- In figure 1, local development and port 8080 are selected
+-  and we choose to make the baseURL = /api/rest or /api/user from the dropdown meanu ( where the arrow points )
 ![alt text](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(250).png)
 ![alt text](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(251).png)
 ![alt text](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(252).png)
