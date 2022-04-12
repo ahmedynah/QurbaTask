@@ -143,20 +143,20 @@ const InsertMany = (req: Request, res: Response, next: NextFunction) => {
  */
 const GetRestaurantById = (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
-    Restaurant.findById(id)
-        .then(results => {
-            return res.status(200).json({
-                restaurants: results,
-                count: results.length
-            })
-        })
-        .catch(error => {
-            logging.error(NAMESPACE, error.message, error);
-            return res.status(500).json({
-                message: error.message,
-                error
-            });
-        })
+    const data = Restaurant.findById(id)
+    console.log(data)
+        // .then(results => {
+        //     return res.status(200).json({
+        //         restaurants: results
+        //     })
+        // })
+        // .catch(error => {
+        //     logging.error(NAMESPACE, error.message, error);
+        //     return res.status(500).json({
+        //         message: error.message,
+        //         error
+        //     });
+        // })
 }
 
 /**
