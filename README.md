@@ -9,13 +9,13 @@ Restaurant API
                             SERVER_HOSTNAME = "localhost" 
                             SERVER_PORT=8080  
                             DB_CONN_STRING=
-                            DB_NAME= ####
+                            DB_NAME= 
                             MONGO_USERNAME = 
                             MONGO_PASSWORD = 
                             MONGO_URL = 
 
 - ### NOTICE: Online mongo db is used, so you need to create a mongo database
-    1. * follow the [link](https://www.mongodb.com/basics/create-database) to create an online mongo db
+    1. follow the [link](https://www.mongodb.com/basics/create-database) to create an online mongo db
 
 - ### You can test the end points using SwaggerUI
 
