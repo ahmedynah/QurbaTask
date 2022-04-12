@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "description": "This is a documentation for the Qurba backend API, please, note that not all apis are implemented and tested, however there is some trouble sending data in body or queries",
+    "description": "This is a documentation for the Qurba backend API",
     "version": "1.0.0",
     "title": "Qurba API",
     "contact": {
