@@ -21,7 +21,9 @@ Restaurant API
 
 # Images #
 - - - - -
-![alt text](https://github.com/ahmedynah/QurbaTask/tree/master/images/Screenshot (249).png)
-![alt text](https://github.com/ahmedynah/QurbaTask/tree/master/images/Screenshot (250).png)
-![alt text](https://github.com/ahmedynah/QurbaTask/tree/master/images/Screenshot (251).png)
-![alt text](https://github.com/ahmedynah/QurbaTask/tree/master/images/Screenshot (252).png)
+
+![alt text](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(249).png)
+![alt text](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(250).png)
+![alt text](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(251).png)
+![alt text](https://github.com/ahmedynah/QurbaTask/blob/master/images/Screenshot%20(252).png)
+
