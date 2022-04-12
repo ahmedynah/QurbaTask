@@ -58,7 +58,7 @@ const CreateUser = (req: Request, res: Response, next: NextFunction) => {
  * 
  * example:
  * ---------
- * localhost:8080/api/user/get/624fecd3e88b5fcf98429089
+ * localhost:8080/api/user/get/user/624fecd3e88b5fcf98429089
  * 
  * req.params.id = 624fecd3e88b5fcf98429089
  * 
@@ -89,7 +89,7 @@ const GetUserById = (req: Request, res: Response, next: NextFunction) => {
  * 
  * example:
  * ---------
- * localhost:8080/api/user/get/search
+ * localhost:8080/api/user/search/user
  * 
  *  req.body = 
              {
@@ -213,7 +213,7 @@ const InsertMany = (req: Request, res: Response, next: NextFunction) => {
                     - User has a restaurant where the Cuisine is Burger
    example:
    --------
-   localhost:8080/api/user/get/search/burger
+   localhost:8080/api/user/get/user/searchby/burger
    req.params.cuisine = burger
 
  * @param req 
@@ -257,7 +257,7 @@ const GetAggregatedList = async (req: Request, res: Response, next: NextFunction
  * 
  * example:
  * ---------
- * localhost:8080/api/user/update/6250ee8e727fe7d0f853593b
+ * localhost:8080/api/user/update/user/6250ee8e727fe7d0f853593b
  * 
  *  req.params.id = 6250ee8e727fe7d0f853593b
  *  req.body = 

@@ -22,7 +22,7 @@ const SetSlug = (restName: string) => {
  * @param body: any
  * @returns rest: object
  */
-const PrepareDataForCreate = ( body:any ) => {
+const PrepareDataForCreate = (body: any) => {
     let { restName, cuisine, long, lat } = body;
     let location = { type: "Point", coordinates: [long, lat] };
 
@@ -54,9 +54,9 @@ const PrepareDataForCreate = ( body:any ) => {
  * @returns 
  */
 const CreateRestaurant = async (req: Request, res: Response, next: NextFunction) => {
-    console.log({...req.body})
+    console.log({ ...req.body })
     const data = { ...PrepareDataForCreate(req.body) }
-    console.log({...data})
+    console.log({ ...data })
     const rest = new Restaurant({
         ...data
     });
@@ -109,24 +109,24 @@ const CreateRestaurant = async (req: Request, res: Response, next: NextFunction)
  */
 const InsertMany = (req: Request, res: Response, next: NextFunction) => {
     let data: any[] = []
-    for(let d in req.body.data){
+    for (let d in req.body.data) {
         console.log(req.body.data[d]);
         data.push(PrepareDataForCreate(req.body.data[d]));
     }
 
     Restaurant.insertMany([...data])
-    .then(results => {
-        return res.status(200).json({
-            rests: results,
-            count: results.length
-        });
-    })
-    .catch(error => {
-        return res.status(500).json({
-            message: error.message,
-            error
+        .then(results => {
+            return res.status(200).json({
+                rests: results,
+                count: results.length
+            });
         })
-    })
+        .catch(error => {
+            return res.status(500).json({
+                message: error.message,
+                error
+            })
+        })
 }
 
 /**
@@ -134,7 +134,7 @@ const InsertMany = (req: Request, res: Response, next: NextFunction) => {
  * 
  * example:
  * ---------
- * localhost:8080/api/rest/get/62507873cdd7f93668f1a199
+ * localhost:8080/api/rest/get/rest/62507873cdd7f93668f1a199
  * req.params.id = 62507873cdd7f93668f1a199
  * 
  * @param req 
@@ -143,27 +143,26 @@ const InsertMany = (req: Request, res: Response, next: NextFunction) => {
  */
 const GetRestaurantById = (req: Request, res: Response, next: NextFunction) => {
     const id = req.params.id;
-    const data = Restaurant.findById(id)
-    console.log(data)
-        // .then(results => {
-        //     return res.status(200).json({
-        //         restaurants: results
-        //     })
-        // })
-        // .catch(error => {
-        //     logging.error(NAMESPACE, error.message, error);
-        //     return res.status(500).json({
-        //         message: error.message,
-        //         error
-        //     });
-        // })
+    Restaurant.findById(id)
+        .then(results => {
+            return res.status(200).json({
+                restaurants: results
+            })
+        })
+        .catch(error => {
+            logging.error(NAMESPACE, error.message, error);
+            return res.status(500).json({
+                message: error.message,
+                error
+            });
+        })
 }
 
 /**
  * Description: search for restaurant with the slug supplied in the params
  * example:
  * --------
- * localhost:8080/api/rest/get/holmes-0
+ * localhost:8080/api/rest/get/rest/holmes-0
  * req.params.slug = pizza-queen
  * @param req 
  * @param res 
@@ -173,13 +172,14 @@ const GetRestaurantBySlug = (req: Request, res: Response, next: NextFunction) =>
     const slug = req.params.slug;
     Restaurant.findOne({ uniqueName: slug })
         .then(results => {
-            if (results.length !== 0)
+            if (results)
                 return res.status(200).json({
                     restaurants: results,
                     count: results.length
                 })
             else
-                next()
+                next();
+
         })
         .catch(error => {
             logging.error(NAMESPACE, error.message, error);
@@ -195,7 +195,7 @@ const GetRestaurantBySlug = (req: Request, res: Response, next: NextFunction) =>
  * 
  * example:
  * ---------
- * localhost:8080/api/rest/get/search
+ * localhost:8080/api/rest/search/rest
    req.body = 
             {
                "restName": "holmes"
@@ -257,7 +257,7 @@ const GetAllRestaurants = (req: Request, res: Response, next: NextFunction) => {
  * Description: search for all restaurant in 1 km distance from the restaurant with the id supplied in params
  * example:
  * --------
- * localhost:8080/api/rest/get/search1km/62507873cdd7f93668f1a199
+ * localhost:8080/api/rest/get/rest/search1km/62507873cdd7f93668f1a199
  * @param req 
  * @param res 
  * @param next 
@@ -265,7 +265,7 @@ const GetAllRestaurants = (req: Request, res: Response, next: NextFunction) => {
 const GetRestsIn1Km = async (req: Request, res: Response, next: NextFunction) => {
     const rest = await Restaurant.findById(req.params.id)
     const cor = rest.location.coordinates;
-    
+
     //if using mongodb is a must
     const restMongo = await Restaurant.find({ location: { $geoWithin: { $center: [cor, 1] } } })
 
@@ -297,7 +297,7 @@ const GetRestsIn1Km = async (req: Request, res: Response, next: NextFunction) =>
  * 
  * example:
  * ---------
- * localhost:8080/api/rest/update/6250ee8e727fe7d0f853593b
+ * localhost:8080/api/rest/update/rest/6250ee8e727fe7d0f853593b
  *  req.params.id = 6250ee8e727fe7d0f853593b
  *  req.body = 
              {
