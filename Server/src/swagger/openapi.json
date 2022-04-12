@@ -63,10 +63,35 @@
         }
       }
     },
+    "/create/user": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Creates new user",
+        "requestBody": {
+          "description": "User Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
     "/insert/rests": {
       "post": {
         "tags": ["Restaurants"],
-        "summary": "Creates many users at once",
+        "summary": "Creates many restaurants at once",
         "requestBody": {
           "description": "Restaurants Object",
           "required": true,
@@ -99,10 +124,98 @@
         }
       }
     },
-    "/update/{id}": {
+    "/search/user": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Searches for a user with specific data supplied in body",
+        "requestBody": {
+          "description": "user Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/insert/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Creates many users at once",
+        "requestBody": {
+          "description": "Users Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "object",
+                      "$ref": "#/definitions/User"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/search/rest": {
+      "post": {
+        "tags": ["Restaurants"],
+        "summary": "Searches for a restaurant with specific data supplied in body",
+        "requestBody": {
+          "description": "Restaurant Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/definitions/Restaurant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/update/rest/{id}": {
       "put": {
         "tags": ["Restaurants"],
-        "summary": "Updates a restaurant using id",
+        "summary": "Updates a restaurant using id and supplied body",
         "requestBody": {
           "description": "Restaurant Object",
           "required": true,
@@ -136,10 +249,33 @@
         }
       }
     },
-    "/get/all": {
-      "get": {
-        "tags": ["Restaurants"],
-        "summary": "Reads all restaurantsUpdate a restaurant",
+    "/update/user/{id}": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Updates a user using id and supplied body",
+        "requestBody": {
+          "description": "Restaurant Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Takes id of the user that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "625559a2d0f0198dfaac153c"
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful operation"
@@ -150,7 +286,21 @@
         }
       }
     },
-    "/get/{id}": {
+    "/get/all": {
+      "get": {
+        "tags": ["Restaurants", "Users"],
+        "summary": "Reads all documents",
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/get/rest/{id}": {
       "get": {
         "tags": ["Restaurants"],
         "summary": "Reads restaurant with specific id",
@@ -176,7 +326,33 @@
         }
       }
     },
-    "/get/{slug}": {
+    "/get/user/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Reads User with specific id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "takes id of the user that needs to be read",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "625559a2d0f0198dfaac153c"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/get/rest/{slug}": {
       "get": {
         "tags": ["Restaurants"],
         "summary": "Reads restaurant with specific slug",
@@ -202,32 +378,8 @@
         }
       }
     },
-    "/get/search": {
-      "get": {
-        "tags": ["Restaurants"],
-        "summary": "Searches for a restaurant with specific data supplied in body",
-        "requestBody": {
-          "description": "Restaurant Object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/Restaurant"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "successful operation"
-          },
-          "400": {
-            "description": "Invalid status value"
-          }
-        }
-      }
-    },
-    "/get/search1km/{id}": {
+
+    "/get/rest/search1km/{id}": {
       "get": {
         "tags": ["Restaurants"],
         "summary": "Searches for a restaurants around the restaurant with the supplied id in a radius of 1km",
@@ -253,9 +405,35 @@
         }
       }
     },
-    "/del/all":{
-      "delete":{
-        "tags": ["Restaurants"],
+    "/get/user/searchby/{cuisine}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Search for all users for a specific Cuisine (e.g. Burgers) that have the following criteria:\n - User has Burgers as part of their Favorite Cuisines\n - User has a restaurant where the Cuisine is Burger",
+        "parameters": [
+          {
+            "name": "cuisine",
+            "in": "path",
+            "description": "fav cuisine for the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "burger"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    },
+    "/del/all": {
+      "delete": {
+        "tags": ["Restaurants", "Users"],
         "summary": "Deletes all restaurants",
         "responses": {
           "200": {
@@ -267,9 +445,9 @@
         }
       }
     },
-    "/del/{id}":{
-      "delete":{
-        "tags": ["Restaurants"],
+    "/del/{id}": {
+      "delete": {
+        "tags": ["Restaurants", "Users"],
         "summary": "Deletes restaurant with specific id",
         "parameters": [
           {
@@ -278,7 +456,7 @@
             "required": true,
             "description": "id of specific restaurant",
             "example": "624fecd3e88b5fcf98429089",
-            "schema":{"type": "string"}
+            "schema": { "type": "string" }
           }
         ],
         "responses": {

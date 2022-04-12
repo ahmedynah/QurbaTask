@@ -24,15 +24,15 @@ router.get('/get/all', controller.GetAllUsers);
     - User has Burgers as part of their Favorite Cuisines
     - User has a restaurant where the Cuisine is Burger
 */
-router.get('/get/search/:cuisine', controller.GetAggregatedList);
+router.get('/get/user/searchby/:cuisine', controller.GetAggregatedList);
 
 // search for a user according to the req body input
-router.get("/get/search", controller.SearchItems);
+router.post("/search/user", controller.SearchItems);
 
 // get user with the id 
-router.get("/get/:id", controller.GetUserById);
+router.get("/get/user/:id", controller.GetUserById);
 
 // update user with id
-router.put("/update/:id", controller.UpdateOne);
+router.put("/update/user/:id", controller.UpdateOne);
 
 export = router;

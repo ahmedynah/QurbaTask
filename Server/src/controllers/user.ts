@@ -221,8 +221,8 @@ const InsertMany = (req: Request, res: Response, next: NextFunction) => {
  * @param next 
  */
 
-const GetAggregatedList = (req: Request, res: Response, next: NextFunction) => {
-  const data = User.aggregate([
+const GetAggregatedList = async (req: Request, res: Response, next: NextFunction) => {
+  const data =  User.aggregate([
         {
             $match: { favCuisines: req.params.cuisine }
         },
@@ -234,10 +234,12 @@ const GetAggregatedList = (req: Request, res: Response, next: NextFunction) => {
                 foreignField: "_id",
                 as: "restaurant_info"
             }
+        },{
+            $match: {"restaurant_info.cuisine": req.params.cuisine }
         }
-    ])
-    // console.log(data)
-    .then((results: any) => {
+    ]) 
+    .then(async (results: any) => {
+        // console.log(results)
         return res.status(200).json({
             users: results,
             count: results.length
@@ -278,7 +280,7 @@ const UpdateOne = (req: Request, res: Response, next: NextFunction) => {
     for (let key in req.body) {
         doc[key] = req.body[key]
     }
-
+    
     User.findOneAndUpdate({ _id }, { ...doc }, { returnDocument: 'after', overwrite: false, runValidators: true, context: 'query' })
         .then((result: any) => {
             return res.status(201).json({

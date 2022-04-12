@@ -23,19 +23,19 @@ router.delete("/del/all", controller.DeleteAll);
 router.delete("/del/:id", controller.DeleteOne);
 
 // search for restaurants with specific properties in req.body body
-router.get("/get/search", controller.SearchItems);
+router.post("/search/rest", controller.SearchItems);
 
 // search for all restaurant in 1 km distance from
 // the restaurant with the id supplied in params
-router.get("/get/search1km/:id", controller.GetRestsIn1Km);
+router.get("/get/rest/search1km/:id", controller.GetRestsIn1Km);
 
 // search for restaurant with the slug supplied in the params
-router.get("/get/:slug", controller.GetRestaurantBySlug);
+router.get("/get/rest/:slug", controller.GetRestaurantBySlug);
 
 //search for the restaurant with the id supplied in the params
-router.get("/get/:id", controller.GetRestaurantById);
+router.get("/get/rest/:id", controller.GetRestaurantById);
 
 // update the restaurant with the id supplied in the params
-router.put("/update/:id", controller.UpdateOne);
+router.put("/update/rest/:id", controller.UpdateOne);
 
 export = router;
