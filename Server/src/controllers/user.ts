@@ -239,7 +239,6 @@ const GetAggregatedList = async (req: Request, res: Response, next: NextFunction
         }
     ]) 
     .then(async (results: any) => {
-        // console.log(results)
         return res.status(200).json({
             users: results,
             count: results.length
